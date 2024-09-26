@@ -55,12 +55,15 @@ const GoodItem = ({ good }: any) => {
                 <div className="flex flex-col gap-1 text-xs font-semibold z-50 text-white">
                     <p>{good.name}</p>
                     <p>
-                        {parseFloat(price).toLocaleString("pt-BR", {
+                        {
+                            ' $ ' + price + ' / ' + good.set.toString() + ' yds'
+                        }
+                        {/* {parseFloat(price).toLocaleString("pt-BR", {
                             style: "currency",
                             currency: "BRL",
                             minimumFractionDigits: 0,
                             maximumFractionDigits: 0,
-                        })}
+                        })} */}
                     </p>
                 </div>
                 <div
