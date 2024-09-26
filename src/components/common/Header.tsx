@@ -99,7 +99,7 @@ export default function Header() {
                 <div onClick={() => router.push("/")} className="sm:px-12 px-0 flex items-center cursor-pointer">
                     <span className={`${myFont.className} text-[24px] text-primaryHotefy-neutral dark:text-primaryHotefy-lighter md:block hidden`}>AfricanFashion</span>
                     <Image
-                        src="/logo.png"
+                        src="/images/logo.png"
                         alt="fashion"
                         width={80}
                         height={0}

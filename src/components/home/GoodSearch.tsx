@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import './style.css'
 import { Button } from "@nextui-org/react";
 import { ImSearch } from "react-icons/im";
 import { useForm } from "react-hook-form";
@@ -7,15 +8,14 @@ import { useRouter } from "next/navigation";
 import Input from "../common/Input";
 import ImageSwiper from "../GoodDetails/ImageSwiper";
 import { useTheme } from "next-themes";
-import { url } from "inspector";
 
 // Sample image URLs for the carousel
 const carouselImages = [
-    "/img1.jpg",
-    "/img2.jpg",
-    "/img3.jpg",
-    "/img4.jpg",
-    "/img5.jpg",
+    "/images/img1.jpg",
+    "/images/img2.jpg",
+    "/images/img3.jpg",
+    "/images/img4.jpg",
+    "/images/img5.jpg",
 ];
 
 interface GoodSearchForm {
@@ -38,6 +38,35 @@ const GoodSearch = () => {
     const backgroundImage = theme === "dark"
         ? "url('/background.jpg')"
         : "url('/background1.jpg')";
+
+    const [displayedText, setDisplayedText] = useState("");
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [index, setIndex] = useState(0);
+    const fullText = "Welcome to Iwu African Fashion";
+    const typingSpeed = 100;
+
+    useEffect(() => {
+        const handleTyping = () => {
+            if (!isDeleting && index < fullText.length) {
+                setDisplayedText((prev) => prev + fullText[index]);
+                setIndex((prevIndex) => prevIndex + 1);
+            } else if (isDeleting && index > 0) {
+                setDisplayedText((prev) => prev.slice(0, -1));
+                setIndex((prevIndex) => prevIndex - 1);
+            } else if (index === fullText.length) {
+                //Start deleting after the full text is typed
+                setTimeout(() => setIsDeleting(true), 1000);
+                //Pause for 1 second before deleting
+            } else if (isDeleting && index === 0) {
+                //Start typing again after the full deletion
+                setIsDeleting(false)
+            }
+        };
+
+        const typingInterval = setInterval(handleTyping, typingSpeed)
+        return () => clearInterval(typingInterval);//Cleanup interval on unmount
+    }, [index, isDeleting])
+
     return (
         <section
             className=" mt-16 p-5 text-center bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center min-h-screen"
@@ -45,17 +74,15 @@ const GoodSearch = () => {
         >
             <div className="hero" >
                 <h2 className="font-bold text-[60px] xl:text-[85px] text-white" style={{ textShadow: '0 4px 8px rgba(0, 0, 0, 0.5)' }}>
-                    Welcome to Iwu {" "}
-                    <span className="text-green-500">
-                        African Fashion
-                    </span>
+                    {displayedText}
+                    {index < fullText.length && <span className="text-green-500">|</span>}
                 </h2>
-                <p className=" p-8 text-white text-[32px] xl:text-[38px] max-w-3xl mx-auto font-[800]">
-                    <span className="text-green-500">
-                        Home of the latest{" "}
-                    </span>
-                    African Fashion.
-                </p>
+                <div className="sliding-text">
+                    <p className="p-8 text-white text-[32px] xl:text-[38px] max-w-3xl mx-auto font-[800] sliding-text-reveal">
+                        <span className="text-green-500">Home of the latest{" "}</span>
+                        African Fashion
+                    </p>
+                </div>
             </div>
             <div className="w-full h-full">
                 <ImageSwiper imagesUrl={carouselImages} />
@@ -75,7 +102,7 @@ const GoodSearch = () => {
                         {...register("text", {
                             required: {
                                 value: true,
-                                message: "Digite o destino no campo de pesquisa!",
+                                message: "Please enter a search term!",
                             },
                         })}
                     />

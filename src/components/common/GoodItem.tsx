@@ -58,12 +58,6 @@ const GoodItem = ({ good }: any) => {
                         {
                             ' $ ' + price + ' / ' + good.set.toString() + ' yds'
                         }
-                        {/* {parseFloat(price).toLocaleString("pt-BR", {
-                            style: "currency",
-                            currency: "BRL",
-                            minimumFractionDigits: 0,
-                            maximumFractionDigits: 0,
-                        })} */}
                     </p>
                 </div>
                 <div

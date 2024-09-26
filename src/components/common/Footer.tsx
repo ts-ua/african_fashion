@@ -121,7 +121,7 @@ export default function Footer() {
             <section className="flex flex-col   items-center justify-around shadow-xl md:flex-row md:gap-y-0 py-2">
                 <Link href="/">
                     <Image
-                        src="/logo.png"
+                        src="/images/logo.png"
                         alt="Foxtech"
                         width={100}
                         height={50}
