@@ -199,7 +199,7 @@ export function Sidebar({ className }: SidebarProps) {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 940 && window.scrollY < 2000) { // Adjust this value to control when the sidebar becomes fixed
+            if (window.scrollY > 940) { // Adjust this value to control when the sidebar becomes fixed
                 setIsFixed(true);
             } else {
                 setIsFixed(false);
