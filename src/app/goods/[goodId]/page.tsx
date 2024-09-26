@@ -21,6 +21,9 @@ const getGoodDetails = async (goodId: string) => {
     const relatedGoods = await prisma.good.findMany({
         where: {
             name: good.name,
+            id: {
+                not: good.id,
+            }
         },
     });
 

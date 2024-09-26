@@ -49,7 +49,7 @@ export default function RegisterPage() {
             <div className='flex flex-col border dark:border-primaryHotefy-lighter dark:bg-[#18181b] items-center justify-center p-8 rounded-lg  max-w-md shadow-lg'>
                 <div className='flex justify-center items-center gap-4'>
                     <Image
-                        src="/logo.png"
+                        src="/images/logo.png"
                         alt="African Fashion Logo"
                         width={100}
                         height={100}
