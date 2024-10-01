@@ -780,6 +780,365 @@ async function main() {
                 type: "Laces",
             },
 
+            // Tulle Laces
+            {
+                name: "TulleLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Tulle lace/1.jpg",
+                imagesUrl: [
+                    "/images/Tulle lace/1.jpg",
+                ],
+                price: 70,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+
+            // Medium tulle lace
+
+            {
+                name: "MediumTulleLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Medium tulle lace/1.jpg",
+                imagesUrl: [
+                    "/images/Medium tulle lace/1.jpg",
+                ],
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+
+            // Cord lace
+
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/1.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/2.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/3.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/4.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/5.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/6.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/7.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/8.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/9.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/10.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/11.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/12.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/13.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/14.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/15.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/16.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/17.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/18.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/19.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/20.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/21.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/22.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/23.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/24.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/25.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+
+            {
+                name: "CordLace",
+                description:
+                    "Um Resort de Ilha Privada Construído para um a dois casais - Tudo está incluído. Um redemoinho de lagoas azul-turquesa e marinhas berço Gladden Private Island, uma ilha rodeada de areia branca a 20 milhas a nordeste de Placencia, no coração da Barreira de Corais de Belize. Esta joia da ilha abriga seu próprio santuário privado, uma vila casualmente elegante projetada para apenas um - dois casais, com o serviço completo de um resort de luxo. Tudo incluído: Todas as refeições preparadas por um chef gourmet, todas as bebidas, incluindo vinhos finos, todas as atividades, incluindo mergulho com snorkel, mergulho e certificação PADI, tratamentos de spa, traslados de e para a cidade de Belize. Incluído no preço para uma estadia de 7 dias está um traslado de helicóptero de ida e volta de 35 minutos sobre o recife de barreira diretamente para Gladden.",
+                coverImage:
+                    "/images/Cord lace/26.jpg",
+                price: 100,
+                set: 5,
+                recommended: true,
+                maxGuests: 4,
+                type: "Laces",
+            },
+
+
             //VliscoDutchHollandaise
             {
                 name: "VliscoDutchHollandaise",

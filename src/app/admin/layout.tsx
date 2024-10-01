@@ -16,13 +16,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
     return (
         <AdminProvider>
+            <TopBar />
             <div className="flex items-start">
                 <Sidebar mobileOrientation="start" />
                 <div
                     className={`${style.mainContainer} 
                     ${style.close}`}
                 >
-                    <TopBar />
                     {children}
                 </div>
             </div>

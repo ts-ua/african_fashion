@@ -1,36 +1,92 @@
-import NextAuth, { AuthOptions, Session, User } from "next-auth";
+import NextAuth, { AuthOptions, User } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { Adapter, AdapterUser } from "next-auth/adapters";
 import { prisma } from "@/lib/prisma";
-import { JWT } from "next-auth/jwt";
+import bcrypt from 'bcryptjs';
+import { Adapter } from "next-auth/adapters";
 
+interface ExtendedUser extends User {
+    id: string;
+}
 
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma) as Adapter,
+    session: {
+        strategy: 'jwt'
+    },
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
             httpOptions: {
-                timeout: 10000, // increase this value as needed
+                timeout: 10000,
+            },
+
+        }),
+        CredentialsProvider({
+            name: 'Credentials',
+            credentials: {
+                useremail: {
+                    label: 'User Email',
+                    type: 'text',
+                    placeholder: 'Your User Email',
+                },
+                password: {
+                    label: 'Password',
+                    type: 'password',
+                },
+            },
+            async authorize(credentials) {
+                const user = await prisma.user.findUnique({
+                    where: { email: credentials?.useremail },
+                });
+
+                if (!user) throw new Error('User email or password is incorrect');
+
+                if (!credentials?.password) {
+                    throw new Error('Please provide your password');
+                }
+
+                if (!user.password) {
+                    throw new Error('User email or password is incorrect');
+                }
+
+                const isPasswordCorrect = await bcrypt.compare(
+                    credentials.password,
+                    user.password
+                );
+
+                if (!isPasswordCorrect) {
+                    throw new Error('User email or password is incorrect');
+                }
+
+                const { password, ...userWithoutPassword } = user;
+
+                return userWithoutPassword;
             },
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
-        async session({ session, token, user }) {
-            session.user = { ...session.user, id: user.id } as {
-                id: string;
-                name: string;
-                email: string;
-            };
+        async jwt({ token, user }) {
+            if (user) {
+                token.user = user as User;
+            }
+            return token;
+        },
+        async session({ session, token }) {
 
+            if (token) {
+                session.user = {
+                    ...(session.user as ExtendedUser),
+                    id: (token.user as ExtendedUser)?.id
+                } as ExtendedUser;
+            }
             return session;
         },
     },
 };
-
 
 const handler = NextAuth(authOptions);
 

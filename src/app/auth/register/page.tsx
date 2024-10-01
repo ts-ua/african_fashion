@@ -1,10 +1,11 @@
-// pages/register/index.js
 'use client'
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Input } from '@nextui-org/react';
 import Image from 'next/image';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 export default function RegisterPage() {
     const router = useRouter();
@@ -12,6 +13,7 @@ export default function RegisterPage() {
         name: '',
         email: '',
         password: '',
+        phone: '',
     });
     const [error, setError] = useState('');
 
@@ -20,11 +22,14 @@ export default function RegisterPage() {
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
+    const handlePhoneChange = (value: string) => {
+        setFormData((prevData) => ({ ...prevData, phone: value }));
+    };
+
     const handleRegister = async (e: any) => {
         e.preventDefault();
 
         try {
-            // Replace this fetch URL with your actual registration endpoint
             const response = await fetch('/api/register', {
                 method: 'POST',
                 headers: {
@@ -46,7 +51,7 @@ export default function RegisterPage() {
 
     return (
         <div className="flex items-center justify-center h-screen bg-gray-50 dark:bg-gray-800">
-            <div className='flex flex-col border dark:border-primaryHotefy-lighter dark:bg-[#18181b] items-center justify-center p-8 rounded-lg  max-w-md shadow-lg'>
+            <div className='flex flex-col border dark:border-primaryHotefy-lighter dark:bg-[#18181b] items-center justify-center p-8 rounded-lg max-w-md shadow-lg'>
                 <div className='flex justify-center items-center gap-4'>
                     <Image
                         src="/images/logo.png"
@@ -64,7 +69,7 @@ export default function RegisterPage() {
                     Create an Account
                 </p>
                 {error && <p className="text-red-500 mb-4">{error}</p>}
-                <form className="flex flex-col gap-4 w-full " onSubmit={handleRegister}>
+                <form className="flex flex-col gap-4 w-full" onSubmit={handleRegister}>
                     <Input
                         fullWidth
                         name="name"
@@ -94,6 +99,24 @@ export default function RegisterPage() {
                         onChange={handleChange}
                         required
                     />
+                    <div className="w-full">
+                        <PhoneInput
+                            country={'us'}
+                            value={formData.phone}
+                            onChange={handlePhoneChange}
+                            inputStyle={{
+                                width: '100%',
+                                border: 'none',
+                                padding: '25px 50px',
+                                background: '#27272A',
+                            }}
+                            dropdownStyle={{
+                                background: '#27272A',
+                                color: 'gray'
+                            }}
+                            placeholder="Enter your phone number"
+                        />
+                    </div>
                     <Button type="submit" className="mt-4" color="secondary">
                         Register
                     </Button>

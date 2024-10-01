@@ -8,19 +8,18 @@ import { FaGoogle } from "react-icons/fa";
 import { Button, Input } from '@nextui-org/react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import toast from "react-hot-toast";
 
 
 export default function LoginPage() {
-    const { status, data } = useSession();
+    const { status } = useSession();
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [authenticated, setAuthenticated] = useState(false);
     const [error, setError] = useState('');
 
     useEffect(() => {
         if (status === 'authenticated') {
-            console.log("data:", data);
             router.push('/');
         }
     }, [status, router]);
@@ -33,33 +32,11 @@ export default function LoginPage() {
         e.preventDefault();
         setError('');
 
-        try {
-            const response = await fetch('/api/signin', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password, type: "credentials" }),
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                setError("Invalid credentials");
-            } else {
-                const user = data.user;
-                localStorage.setItem('user', JSON.stringify(user));
-                setAuthenticated(true);
-                if (user.email === "drew.pham@hotmail.com") {
-                    window.location.assign('/admin');
-                }
-                else {
-                    window.location.assign('/');
-                }
-            }
-        } catch (error) {
-            setError('An error occurred while logging in.');
-        }
+        const result = signIn('credentials', {
+            redirect: false,
+            useremail: email,
+            password: password,
+        });
     };
 
 

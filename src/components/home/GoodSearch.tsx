@@ -54,17 +54,13 @@ const GoodSearch = () => {
                 setDisplayedText((prev) => prev.slice(0, -1));
                 setIndex((prevIndex) => prevIndex - 1);
             } else if (index === fullText.length) {
-                //Start deleting after the full text is typed
                 setTimeout(() => setIsDeleting(true), 1000);
-                //Pause for 1 second before deleting
             } else if (isDeleting && index === 0) {
-                //Start typing again after the full deletion
                 setIsDeleting(false)
             }
         };
-
         const typingInterval = setInterval(handleTyping, typingSpeed)
-        return () => clearInterval(typingInterval);//Cleanup interval on unmount
+        return () => clearInterval(typingInterval);
     }, [index, isDeleting])
 
     return (
@@ -78,7 +74,7 @@ const GoodSearch = () => {
                     {index < fullText.length && <span className="text-green-500">|</span>}
                 </h2>
                 <div className="sliding-text">
-                    <p className="p-8 text-white text-[32px] xl:text-[38px] max-w-3xl mx-auto font-[800] sliding-text-reveal">
+                    <p className="p-8 text-white text-[32px] xl:text-[38px] max-w-3xl mx-auto font-[800]">
                         <span className="text-green-500">Home of the latest{" "}</span>
                         African Fashion
                     </p>

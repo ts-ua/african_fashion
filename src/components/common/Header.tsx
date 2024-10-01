@@ -25,18 +25,11 @@ import localFont from 'next/font/local';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "../ui/sheet"
 import { CartContext } from "@/providers/cart"
 import Cart from "./cart"
-import { ExtendedSession } from "@/type/sessionData"
 const myFont = localFont({ src: '../../app/fonts/SpicyRice-Regular.ttf' })
 
 export default function Header() {
-    const [user, setUser] = useState({
-        id: '',
-        name: '',
-        email: '',
-        password: '',
-        image: ''
-    })
-    const { status, data } = useSession() as { status: string; data: ExtendedSession | null }
+    const { status } = useSession() as { status: string; }
+    const { data } = useSession()
     const { products, subtotal, total, totalDiscount } = useContext(CartContext)
     const [isDarkMode, setIsDarkMode] = useState(() => {
         if (typeof window !== "undefined") {
@@ -47,7 +40,6 @@ export default function Header() {
     })
     const router = useRouter();
     const handleLogoutClick = () => {
-        localStorage.removeItem('user');
         signOut();
     }
 
@@ -81,17 +73,7 @@ export default function Header() {
         }
     }, [isDarkMode]);
 
-    useEffect(() => {
-        const updatedUser = localStorage.getItem('user');
-        setUser(updatedUser ? JSON.parse(updatedUser) : null);
-    }, [])
-
-    const [selectedValue, setSelectedValue] = useState("georges");
     const { numTotalItems } = useContext(CartContext);
-
-    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedValue(event.target.value);
-    };
 
     return (
         <div className="h-16 fixed w-full z-50 bg-transparent dark:bg-[#18181b] shadow-lg dark:border-b-1 dark:border-primaryHotefy-lighter flex items-center justify-between lg:px-12 px-2 opacity-90">
@@ -110,7 +92,7 @@ export default function Header() {
 
             <div className="flex justify-between" >
                 {
-                    status === 'loading' && !user?.id && (
+                    status === 'loading' && (
                         <Button
                             variant="shadow"
                             color='secondary'
@@ -237,7 +219,7 @@ export default function Header() {
                                         </Chip>
                                     </SheetHeader>
 
-                                    <Cart userId={user?.id} />
+                                    <Cart userId={data?.user?.id} />
                                 </SheetContent>
                             </Sheet>
 
@@ -268,8 +250,8 @@ export default function Header() {
                                     disabledKeys={["user-info"]}
                                 >
                                     <DropdownItem className="h-14 gap-2" key="user-info">
-                                        <p className="font-semibold">{data?.user?.name || user?.name}</p>
-                                        <p className="text-xs">{data?.user?.email || user?.email}</p>
+                                        <p className="font-semibold">{data?.user?.name}</p>
+                                        <p className="text-xs">{data?.user?.email}</p>
                                     </DropdownItem>
                                     <DropdownItem
                                         startContent={<TbSunMoon />}

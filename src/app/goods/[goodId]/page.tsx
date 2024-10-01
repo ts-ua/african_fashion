@@ -9,6 +9,7 @@ import GoodItem from "@/components/common/GoodItem";
 import GoodOrder from "@/components/GoodDetails/GoodOrder";
 import { computeProductTotalPrice } from "@/helpers/product";
 import ZoomImage from "@/components/zoomImage/ZoomImage";
+import GoodSwiper from "@/components/GoodDetails/GoodSwiper";
 
 const getGoodDetails = async (goodId: string) => {
     const good = await prisma.good.findUnique({
@@ -43,7 +44,6 @@ const GoodDetails = async ({ params }: { params: { goodId: string } }) => {
         <section className="overflow-x-hidden dark:bg-[#18181b] w-full">
             <div className="w-full h-full flex mt-[66px] flex lg:flex-row flex-col justify-center">
                 <div className="lg:w-1/3 w-full h-full p-4">
-                    {/* <ImageSwiper imagesUrl={good.imagesUrl} /> */}
                     <ZoomImage coverImage={good.coverImage} />
                 </div>
                 <div className="lg:w-1/2 w-full h-full p-8">
@@ -59,9 +59,7 @@ const GoodDetails = async ({ params }: { params: { goodId: string } }) => {
 
                 <GoodDivider />
                 <section className="w-full mx-auto flex flex-col md:flex-row flex-wrap items-center justify-center gap-2">
-                    {relatedGoods.map((good: any) => (
-                        <GoodItem good={good} key={good.id} product={computeProductTotalPrice(good)} />
-                    ))}
+                    <GoodSwiper relatedGoods={relatedGoods} />
                 </section>
             </div>
         </section>

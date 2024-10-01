@@ -86,6 +86,9 @@
   @apply w-full items-center flex justify-start
 }
 
+.flexCenter {
+  @apply w-full items-center flex justify-center
+}
 
 .swiper-button-prev:after {
   left: calc(32%)

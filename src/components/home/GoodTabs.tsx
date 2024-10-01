@@ -59,9 +59,9 @@ export default function GoodTabs() {
             <div className="md:block ">
                 <div className="border-t">
                     <div className="bg-background dark:bg-[#18181b] ">
-                        <div className="grid lg:grid-cols-5">
-                            <Sidebar className="lg:block hidden" />
-                            <div className="col-span-3 lg:col-span-4 lg:border-l min-h-[650px]">
+                        <div className="grid lg:grid-cols-5 ">
+                            <Sidebar />
+                            <div className=" col-span-3 md:col-span-4 lg:border-l min-h-[650px]">
                                 <div className="h-full sm:px-4 py-6 lg:px-8 px-0">
                                     <Tabs defaultValue="all" className="h-full space-y-6">
                                         <div className={`${isFixed ? "fixed top-16 z-50 bg-[#18181b] rounded-lg justify-center" : ""}  flex items-center justify-center md:justify-start`}>

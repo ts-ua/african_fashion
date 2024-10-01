@@ -1,8 +1,7 @@
-import { Content } from "@/components/admin/Content";
-import TopBar from "@/components/admin/Topbar";
-import { Sidebar } from "@/components/admin/sidebar/page";
+import Content from "@/components/admin/Content";
+
 
 
 export default function AdminPage() {
-    return <Content title="Google" />;
+    return <Content />;
 }

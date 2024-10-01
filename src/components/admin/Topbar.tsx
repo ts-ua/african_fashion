@@ -20,15 +20,8 @@ import { ExtendedSession } from "@/type/sessionData"
 import { CiMail } from "react-icons/ci";
 import { PiBellRingingLight } from "react-icons/pi";
 import { useDashboardContext } from "@/providers/admin"
-
+import Image from "next/image"
 export default function TopBar() {
-    const [user, setUser] = useState({
-        id: '',
-        name: '',
-        email: '',
-        password: '',
-        image: ''
-    })
     const { status, data } = useSession() as { status: string; data: ExtendedSession | null }
     const [isDarkMode, setIsDarkMode] = useState(() => {
         if (typeof window !== "undefined") {
@@ -39,7 +32,6 @@ export default function TopBar() {
     })
     const router = useRouter();
     const handleLogoutClick = () => {
-        localStorage.removeItem('user');
         signOut();
     }
 
@@ -73,17 +65,12 @@ export default function TopBar() {
         }
     }, [isDarkMode]);
 
-    useEffect(() => {
-        const updatedUser = localStorage.getItem('user');
-        setUser(updatedUser ? JSON.parse(updatedUser) : null);
-    }, []);
-
     const { numTotalItems } = useContext(CartContext);
     const { openSidebar, orders } = useDashboardContext();
 
 
     return (
-        <div className="h-16 w-full bg-transparent dark:bg-[#18181b] rounded-lg shadow-lg dark:border-b-1 dark:border-primaryHotefy-lighter lg:px-12 px-2 opacity-90">
+        <div className="h-16 w-full bg-transparent dark:bg-[#18181b]  shadow-lg dark:border-b-1 dark:border-primaryHotefy-lighter lg:px-12 px-2">
             <div className="float-left h-full flex lg:hidden px-4">
                 <button
                     type="button"
@@ -95,9 +82,21 @@ export default function TopBar() {
                     &#8801;
                 </button>
             </div>
+            <div className="float-left h-full flex px-4">
+                <div onClick={() => router.push("/")} className="sm:px-12 px-0 flex items-center cursor-pointer">
+                    <Image
+                        src="/images/logo.png"
+                        alt="fashion"
+                        width={80}
+                        height={0}
+                        style={{ height: "auto", borderRadius: "50%" }}
+                    />
+                </div>
+
+            </div>
             <div className="float-right flex h-full">
                 {
-                    status === 'loading' && !user?.id && (
+                    status === 'loading' && (
                         <Button
                             variant="shadow"
                             color='secondary'
@@ -106,7 +105,7 @@ export default function TopBar() {
                         ></Button>
                     )
                 }
-                {status === 'unauthenticated' && !user?.id && (
+                {status === 'unauthenticated' && (
                     <Dropdown placement="left-start">
                         <DropdownTrigger>
                             <Avatar
@@ -140,7 +139,7 @@ export default function TopBar() {
                     </Dropdown>
                 )}
                 {
-                    status === 'authenticated' || user?.id && (
+                    status === 'authenticated' && (
                         <div className="flex gap-4 items-center">
                             <Dropdown placement="bottom-start">
                                 <DropdownTrigger>
@@ -202,7 +201,7 @@ export default function TopBar() {
                                     disabledKeys={["order-info"]}
                                 >
                                     {
-                                        orders?.length > 0 ? (
+                                        orders && orders.length > 0 ? (
                                             orders.map((order) => (
                                                 <DropdownItem key={order.id} className="flex items-center gap-2">
                                                     <div className="flex flex-col">
@@ -237,8 +236,8 @@ export default function TopBar() {
                                     disabledKeys={["user-info"]}
                                 >
                                     <DropdownItem className="h-14 gap-2" key="user-info">
-                                        <p className="font-semibold">{data?.user?.name || user?.name}</p>
-                                        <p className="text-xs">{data?.user?.email || user?.email}</p>
+                                        <p className="font-semibold">{data?.user?.name}</p>
+                                        <p className="text-xs">{data?.user?.email}</p>
                                     </DropdownItem>
                                     <DropdownItem
                                         startContent={<TbSunMoon />}

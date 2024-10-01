@@ -1,6 +1,5 @@
 
 import { SidebarItems } from "./SidebarItems";
-import { SidebarHeader } from "./SidebarHeader";
 import { useContext } from "react";
 import { AdminContext, useDashboardContext } from "@/providers/admin";
 
@@ -17,7 +16,7 @@ const style = {
     container: "pb-32 lg:pb-6",
     close: "hidden lg:block lg:w-64 lg:z-auto",
     open: "w-8/12 absolute z-40 sm:w-5/12 lg:hidden",
-    default: "bg-gray-100 min-h-screen overflow-y-auto top-0 lg:relative",
+    default: "bg-gray-100 min-h-screen overflow-y-auto top-0 lg:relative dark:bg-[#18181b]",
 };
 
 export function Sidebar(props: SidebarProps) {
@@ -29,7 +28,6 @@ export function Sidebar(props: SidebarProps) {
          ${style.close} `}
         >
             <div className={style.container}>
-                <SidebarHeader />
                 <SidebarItems />
             </div>
         </aside>

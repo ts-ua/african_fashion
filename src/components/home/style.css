@@ -28,5 +28,4 @@
 .sliding-text-reveal {
     animation: slideRight 6s ease-in-out infinite;
     white-space: nowrap;
-    /* Prevents the text from wrapping */
 }

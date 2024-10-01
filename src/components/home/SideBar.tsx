@@ -52,12 +52,12 @@ const buttonData = [
                 itemLists: []
             },
             {
-                title: "Curtain Lace",
-                itemLists: []
-            },
-            {
                 title: "Cord Lace",
                 itemLists: [],
+            },
+            {
+                title: "Tulle Lace",
+                itemLists: ["Tulle Lace", "Medium Tulle Lace"],
             },
             {
                 title: "French Lace",
@@ -66,10 +66,6 @@ const buttonData = [
 
             {
                 title: "Regular Lace",
-                itemLists: [],
-            },
-            {
-                title: "Stoned Lace",
                 itemLists: [],
             },
             {
@@ -196,10 +192,9 @@ export function Sidebar({ className }: SidebarProps) {
         setOpenSubIndex(openSubIndex === index ? null : index);
     };
 
-
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 940) { // Adjust this value to control when the sidebar becomes fixed
+            if (window.scrollY > 940) {
                 setIsFixed(true);
             } else {
                 setIsFixed(false);
@@ -212,7 +207,7 @@ export function Sidebar({ className }: SidebarProps) {
 
     return (
 
-        <div className=" py-4 overflow-hidden" >
+        <div className=" py-4 overflow-hidden lg:block hidden" >
             <div className={`${isFixed ? "fixed top-20 z-50 w-1/5 translate-y-0" : "translate-y-[-20px]"} transition-transform duration-1000 ease-in-out transform`}>
                 <h2 className="mb-2 p-4 text-lg font-semibold tracking-tight">
                     Products
@@ -240,9 +235,15 @@ export function Sidebar({ className }: SidebarProps) {
                                                     aria-haspopup="true"
                                                     aria-expanded={openSubIndex === subIndex}
                                                 >
-                                                    <span>{subItem.title}</span>
                                                     {
-                                                        subItem.itemLists.length ? <FaAngleDown className={`ml-auto transition-transform ${openSubIndex === subIndex ? 'rotate-180' : ''}`} /> : ''
+                                                        !subItem.itemLists.length ?
+                                                            <Link key={index} className="gap-2 flexStart text-sm" href={`/goods/search?text=${subItem.title}`}>
+                                                                <span>{subItem.title}</span>
+                                                            </Link>
+                                                            : <>
+                                                                <span>{subItem.title}</span>
+                                                                <FaAngleDown className={`ml-auto transition-transform ${openSubIndex === subIndex ? 'rotate-180' : ''}`} />
+                                                            </>
                                                     }
                                                 </button>
                                                 {

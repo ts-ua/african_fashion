@@ -37,21 +37,21 @@ const ImageSwiper: React.FC<ImageSwiperProps> = ({ imagesUrl }) => {
     return (
         <div className="swiper-container">
             <Swiper
-                spaceBetween={10} // Adjust space between slides
-                slidesPerView={1} // Default slides per view
+                spaceBetween={10}
+                slidesPerView={1}
                 breakpoints={{
                     768: {
-                        slidesPerView: 1, // 2 slides for medium screens
+                        slidesPerView: 1,
                     },
                     1024: {
-                        slidesPerView: 2, // 3 slides for larger screens
+                        slidesPerView: 2,
                     },
                 }}
                 pagination={{ clickable: true }}
                 navigation
                 autoplay={{
-                    delay: 3000, // Delay in milliseconds (e.g., 3000ms = 3s)
-                    disableOnInteraction: false, // Continue autoplay after user interactions
+                    delay: 3000,
+                    disableOnInteraction: false,
                 }}
                 loop={true}
             >

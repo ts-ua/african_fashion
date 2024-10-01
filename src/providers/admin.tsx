@@ -83,7 +83,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
         if (sidebarOpen && window.innerWidth < 1024) {
             setSidebarOpen(true);
         }
-    }, [pathname, sidebarOpen]); // Listen for pathname change
+    }, [pathname, sidebarOpen]);
 
     return (
         <AdminContext.Provider value={{ sidebarOpen, openSidebar, closeSidebar, orders }}>
