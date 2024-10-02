@@ -1,55 +1,45 @@
-import multer from 'multer';
+
+import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 import { prisma } from '@/lib/prisma';
-import { NextResponse } from 'next/server';
 
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-      const dir = path.join(process.cwd(), 'public', 'images');
-      fs.mkdirSync(dir, { recursive: true });
-      cb(null, dir);
-    },
-    filename: (req, file, cb) => {
-      cb(null, file.originalname);
-    },
-  }),
-});
 
-export async function POST(request: any) {
+export async function POST(req: any) {
   try {
-    const formData = await request.formData();
-    const image = formData.get('image');
+    const formData = await req.formData();
+    const file = formData.get('file') as File;
     const productData = JSON.parse(formData.get('productData'));
+
+    if (!file) {
+      return NextResponse.json({ error: 'File not provided' }, { status: 400 });
+    }
+
+    const buffer = Buffer.from(await file.arrayBuffer());
+
+    // Generate a secret/unique file name using a hash
+    const uniqueName = `${crypto.randomBytes(16).toString('hex')}-${file.name}`;
+    const uploadPath = path.join(process.cwd(), 'public', `uploads/${productData.name}`, uniqueName);
+    await fs.promises.mkdir(path.dirname(uploadPath), { recursive: true });
+    await fs.promises.writeFile(uploadPath, buffer);
 
     await prisma.good.create({
       data: {
         name: productData.name,
         price: productData.price,
         set: productData.set,
-        coverImage: `/images/${image.name}`,
+        coverImage: `/uploads/${productData.name}/${uniqueName}`,
         maxGuests: productData.maxGuests,
         type: productData.type,
         recommended: productData.recommended,
-        description: ''
+        description: '',
       },
     });
 
-    return new NextResponse(
-      JSON.stringify({ message: 'New Product registered successfully' }),
-      { status: 201 }
-    );
-  } catch (error) {
-    return new NextResponse(
-      JSON.stringify({ message: 'Error registering product' }),
-      { status: 500 }
-    );
+    return NextResponse.json({ message: 'File uploaded successfully', file: file.name });
+  } catch (err) {
+    console.error("Error:", err);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
-}
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
 };
