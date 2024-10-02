@@ -13,7 +13,7 @@ const SelGoods: React.FC<SelGoodsProps> = ({ text }) => {
     useEffect(() => {
         const fetchGoods = async () => {
             const response = await fetch(
-                `/api/goods/search?text=${text}`
+                `/api/goods?text=${text}`
             );
             const data = await response.json();
             setGoods(data);

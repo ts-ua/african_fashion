@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import {
   Table,
   TableHeader,
@@ -36,11 +36,12 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
   vacation: "warning",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
-
-type User = typeof users[0];
+const INITIAL_VISIBLE_COLUMNS = ["name", "type", "price", "set"];
 
 export default function Settings() {
+
+
+  const [goods, setGoods] = useState([]);
   const [filterValue, setFilterValue] = useState("");
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set([]));
   const [visibleColumns, setVisibleColumns] = useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
@@ -54,27 +55,38 @@ export default function Settings() {
   const [page, setPage] = useState(1);
   const hasSearchFilter = Boolean(filterValue);
 
+  type Good = typeof goods[0];
+
+  useEffect(() => {
+    const fetchGoods = async () => {
+      try {
+        const response = await fetch(`/api/goods?text=all`);
+        if (!response.ok) throw new Error('Failed to fetch');
+        const data = await response.json();
+        setGoods(data);
+      } catch (error) {
+        console.error("Error fetching goods:", error);
+      }
+    };
+
+    fetchGoods();
+  }, []);
+
   const headerColumns = useMemo(() => {
     if (visibleColumns === "all") return columns;
     return columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
   }, [visibleColumns]);
 
   const filteredItems = useMemo(() => {
-    let filteredUsers = [...users];
+    let filteredGoods = [...goods];
 
     if (hasSearchFilter) {
-      filteredUsers = filteredUsers.filter((user) =>
-        user.name.toLowerCase().includes(filterValue.toLowerCase())
+      filteredGoods = filteredGoods.filter((good: any) =>
+        good.name.toLowerCase().includes(filterValue.toLowerCase())
       );
     }
-    if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
-      filteredUsers = filteredUsers.filter((user) =>
-        Array.from(statusFilter).includes(user.status)
-      );
-    }
-
-    return filteredUsers;
-  }, [users, filterValue, statusFilter]);
+    return filteredGoods;
+  }, [goods, filterValue, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -85,40 +97,26 @@ export default function Settings() {
   }, [page, filteredItems, rowsPerPage]);
 
   const sortedItems = useMemo(() => {
-    return [...items].sort((a: User, b: User) => {
-      const first = a[sortDescriptor.column as keyof User] as number;
-      const second = b[sortDescriptor.column as keyof User] as number;
+    return [...items].sort((a: Good, b: Good) => {
+      const first = a[sortDescriptor.column as keyof Good] as number;
+      const second = b[sortDescriptor.column as keyof Good] as number;
       const cmp = first < second ? -1 : first > second ? 1 : 0;
       return sortDescriptor.direction === "descending" ? -cmp : cmp;
     });
   }, [sortDescriptor, items]);
 
-  const renderCell = useCallback((user: User, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof User];
+  const renderCell = useCallback((good: any, columnKey: React.Key) => {
+    const cellValue = good[columnKey as keyof Good];
 
     switch (columnKey) {
       case "name":
         return (
           <User
-            avatarProps={{ radius: "lg", src: user.avatar }}
-            description={user.email}
+            avatarProps={{ radius: "lg", src: good.coverImage }}
             name={cellValue}
           >
-            {user.email}
+            {good.name}
           </User>
-        );
-      case "role":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">{user.team}</p>
-          </div>
-        );
-      case "status":
-        return (
-          <Chip className="capitalize" color={statusColorMap[user.status]} size="sm" variant="flat">
-            {cellValue}
-          </Chip>
         );
       case "actions":
         return (
@@ -188,27 +186,6 @@ export default function Settings() {
             onValueChange={onSearchChange}
           />
           <div className="flex gap-3">
-            <Dropdown>
-              <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<RiArrowDropDownLine className="text-small" />} variant="flat">
-                  Status
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                disallowEmptySelection
-                aria-label="Table Columns"
-                closeOnSelect={false}
-                selectedKeys={statusFilter}
-                selectionMode="multiple"
-                onSelectionChange={setStatusFilter}
-              >
-                {statusOptions.map((status) => (
-                  <DropdownItem key={status.uid} className="capitalize">
-                    {capitalize(status.name)}
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </Dropdown>
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
                 <Button endContent={<RiArrowDropDownLine className="text-small" />} variant="flat">
@@ -310,8 +287,8 @@ export default function Settings() {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No users found"} items={sortedItems}>
-        {(item) => (
+      <TableBody emptyContent={"No Products found"} items={sortedItems}>
+        {(item: any) => (
           <TableRow key={item.id}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
           </TableRow>

@@ -18,7 +18,6 @@ export async function POST(req: any) {
 
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Generate a secret/unique file name using a hash
     const uniqueName = `${crypto.randomBytes(16).toString('hex')}-${file.name}`;
     const uploadPath = path.join(process.cwd(), 'public', `uploads/${productData.name}`, uniqueName);
     await fs.promises.mkdir(path.dirname(uploadPath), { recursive: true });

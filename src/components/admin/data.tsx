@@ -2,7 +2,6 @@
 import { FaHome as HomeIcon } from "react-icons/fa";
 import { FaCog as SettingsIcon } from "react-icons/fa";
 
-
 export const data = [
     {
         title: "Dashboard",
@@ -18,14 +17,11 @@ export const data = [
 
 //table
 const columns = [
-    { name: "ID", uid: "id", sortable: true },
     { name: "NAME", uid: "name", sortable: true },
-    { name: "AGE", uid: "age", sortable: true },
-    { name: "ROLE", uid: "role", sortable: true },
-    { name: "TEAM", uid: "team" },
-    { name: "EMAIL", uid: "email" },
-    { name: "STATUS", uid: "status", sortable: true },
-    { name: "ACTIONS", uid: "actions" },
+    { name: "TYPE", uid: "type", sortable: true },
+    { name: "PRICE", uid: "price", sortable: true },
+    { name: "SET", uid: "set" },
+    { name: "ACTIONS", uid: "actions", }
 ];
 
 const statusOptions = [
