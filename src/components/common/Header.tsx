@@ -25,7 +25,13 @@ import localFont from 'next/font/local';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "../ui/sheet"
 import { CartContext } from "@/providers/cart"
 import Cart from "./cart"
+import { User } from "next-auth"
 const myFont = localFont({ src: '../../app/fonts/SpicyRice-Regular.ttf' })
+
+interface ExtendedUser extends User {
+    id: any;
+}
+
 
 export default function Header() {
     const { status } = useSession() as { status: string; }
@@ -219,7 +225,7 @@ export default function Header() {
                                         </Chip>
                                     </SheetHeader>
 
-                                    <Cart userId={data?.user?.id} />
+                                    <Cart userId={data?.user ? (data.user as ExtendedUser).id : undefined} />
                                 </SheetContent>
                             </Sheet>
 

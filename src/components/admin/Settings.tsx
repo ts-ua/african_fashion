@@ -27,7 +27,10 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { IoSearch } from "react-icons/io5";
 import { columns, statusOptions, users } from "./data";
 import { capitalize } from "@/lib/utils";
-import ProductModal from "../common/admin.modal";
+import ProductModal from "../common/adminModal/admin.modal";
+import ViewProductModal from "../common/adminModal/view.modal";
+import EditProductModal from "../common/adminModal/edit.modal";
+import { GoodInfo } from "@/type/good";
 
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
@@ -36,7 +39,7 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
   vacation: "warning",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "type", "price", "set"];
+const INITIAL_VISIBLE_COLUMNS = ["name", "type", "price", "set", "actions"];
 
 export default function Settings() {
 
@@ -47,7 +50,21 @@ export default function Settings() {
   const [visibleColumns, setVisibleColumns] = useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
   const [statusFilter, setStatusFilter] = useState<Selection>("all");
   const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  // modal
   const [modalOpen, setModalOpen] = useState(false);
+  const [viewModalOpen, setViewModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  // goodinfo
+  const [goodInfo, setGoodInfo] = useState<GoodInfo>({
+    id: '',
+    name: '',
+    type: '',
+    price: 0,
+    set: 0,
+    coverImage: '',
+    description: '',
+  });
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: "age",
     direction: "ascending",
@@ -105,7 +122,39 @@ export default function Settings() {
     });
   }, [sortDescriptor, items]);
 
-  const renderCell = useCallback((good: any, columnKey: React.Key) => {
+  const handleViewModalToggle = (newInfo: any) => {
+    setViewModalOpen(prev => !prev);
+    setGoodInfo(prev => ({ ...prev, ...newInfo }));
+  }
+
+  const handleEditModalToggle = useCallback((newInfo: any) => {
+    setEditModalOpen(prev => !prev);
+    setGoodInfo(prev => ({ ...prev, ...newInfo }));
+  }, [])
+
+  const handleDelete = async (id: string) => {
+    try {
+
+      const response = await fetch(`/api/goods/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-type': 'application/json'
+        }
+      })
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      console.log('Delete successful:', result);
+
+    } catch (error) {
+      console.error('Delete failed:', error);
+    }
+  }
+
+  const renderCell = (good: any, columnKey: React.Key) => {
     const cellValue = good[columnKey as keyof Good];
 
     switch (columnKey) {
@@ -128,9 +177,9 @@ export default function Settings() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
-                <DropdownItem>Edit</DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
+                <DropdownItem onClick={() => handleViewModalToggle(good)}> View </DropdownItem>
+                <DropdownItem onClick={handleEditModalToggle}>Edit</DropdownItem>
+                <DropdownItem onClick={() => handleDelete(good.id)}>Delete</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -138,7 +187,7 @@ export default function Settings() {
       default:
         return cellValue;
     }
-  }, []);
+  };
 
   const onNextPage = useCallback(() => {
     if (page < pages) {
@@ -215,10 +264,22 @@ export default function Settings() {
               isOpen={modalOpen}
               onOpenChange={handleModalToggle}
             />
+
+            <ViewProductModal
+              isOpen={viewModalOpen}
+              onOpenChange={handleViewModalToggle}
+              goodInfo={goodInfo}
+            />
+            <EditProductModal
+              isOpen={editModalOpen}
+              onOpenChange={handleEditModalToggle}
+              goodInfo={goodInfo}
+            />
+
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total {users.length} users</span>
+          <span className="text-default-400 text-small">Total {filteredItems.length} Products</span>
           <label className="flex items-center text-default-400 text-small">
             Rows per page:
             <select className="bg-transparent outline-none text-default-400 text-small" onChange={onRowsPerPageChange}>
@@ -230,7 +291,7 @@ export default function Settings() {
         </div>
       </div>
     );
-  }, [filterValue, statusFilter, visibleColumns, onSearchChange, onRowsPerPageChange, modalOpen, users.length]);
+  }, [filterValue, statusFilter, visibleColumns, onSearchChange, onRowsPerPageChange, modalOpen, viewModalOpen, users.length]);
 
   const bottomContent = useMemo(() => {
     return (

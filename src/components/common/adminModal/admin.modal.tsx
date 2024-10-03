@@ -12,7 +12,7 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
-import { SubTypes } from "../admin/data";
+import { SubTypes } from "../../admin/data";
 import { FaCamera } from "react-icons/fa";
 
 interface ProductModalProps {
