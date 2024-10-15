@@ -1,5 +1,5 @@
 import { CartContext } from "@/providers/cart";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import CartItem from "../cart/cartItem";
 import { computeProductTotalPrice } from "@/helpers/product";
 import { Button, Link, Tooltip } from "@nextui-org/react";
@@ -10,16 +10,13 @@ import { AiOutlineSafety } from "react-icons/ai";
 // import { loadStripe } from "@stripe/stripe-js";
 import { useSession } from "next-auth/react";
 import { ScrollArea } from "../ui/scroll-area";
-import { createOrder } from "@/actions/order";
-// import { createOrder } from "@/actions/order";
+import { createOrder, createTriggerAndNotifyFunction } from "@/actions/order";
 
 const Cart = ({ userId }: { userId: string }) => {
   const { products, subtotal, total, totalDiscount } = useContext(CartContext);
   const { status, data } = useSession();
-
   const handleFinishPurchaseClick = async () => {
     const order = await createOrder(products, userId);
-    console.log("order:", order)
 
     // const checkout = await createCheckout(products, order.id);
 

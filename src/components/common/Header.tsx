@@ -21,6 +21,7 @@ import { TbSunMoon } from "react-icons/tb"
 import { MdTravelExplore } from "react-icons/md"
 import { FaCaretDown } from "react-icons/fa";
 import { HiShoppingCart } from "react-icons/hi2";
+import { FaUserCircle } from "react-icons/fa";
 import localFont from 'next/font/local';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "../ui/sheet"
 import { CartContext } from "@/providers/cart"
@@ -45,8 +46,9 @@ export default function Header() {
         return false;
     })
     const router = useRouter();
-    const handleLogoutClick = () => {
-        signOut();
+    const handleLogoutClick = async () => {
+        await signOut();
+        window.location.assign("/");
     }
 
     const toggleDarkMode = () => {
@@ -128,9 +130,9 @@ export default function Header() {
                             <DropdownItem
                                 startContent={<LuLogIn />}
                                 key="login"
-                                onClick={() => router.push("/auth/login")}
+                                onClick={() => router.push("/user/login")}
                             >
-                                <Link href={`/auth/login`}>Login</Link>
+                                Login
                             </DropdownItem>
                             <DropdownItem
                                 startContent={<TbSunMoon />}
@@ -160,34 +162,13 @@ export default function Header() {
                                     color="secondary"
                                     disabledKeys={["pages"]}
                                 >
-                                    <DropdownItem startContent={<MdTravelExplore />}
-                                        onClick={() => router.push("/")}>
-                                        Blog
-                                    </DropdownItem>
-                                    <DropdownItem
-                                        startContent={<MdTravelExplore />}
-                                        onClick={() => router.push("/")}
-                                    >
-                                        Shipping & Returns
-                                    </DropdownItem>
-                                    <DropdownItem
-                                        startContent={<MdTravelExplore />}
-                                        onClick={() => router.push("/")}
-                                    >
-                                        Privacy Policy
-                                    </DropdownItem>
                                     <DropdownItem
                                         startContent={<MdTravelExplore />}
                                         onClick={() => router.push("/")}
                                     >
                                         About Us
                                     </DropdownItem>
-                                    <DropdownItem
-                                        startContent={<MdTravelExplore />}
-                                        onClick={() => router.push("/")}
-                                    >
-                                        FAQ
-                                    </DropdownItem>
+
                                 </DropdownMenu>
                             </Dropdown>
 
@@ -237,7 +218,7 @@ export default function Header() {
                                     })
                                     .replace("R$", "$")}
                             </p>
-                            <Dropdown placement="right-end">
+                            <Dropdown >
                                 <DropdownTrigger>
                                     <Avatar
                                         isBordered
@@ -258,6 +239,9 @@ export default function Header() {
                                     <DropdownItem className="h-14 gap-2" key="user-info">
                                         <p className="font-semibold">{data?.user?.name}</p>
                                         <p className="text-xs">{data?.user?.email}</p>
+                                    </DropdownItem>
+                                    <DropdownItem startContent={<FaUserCircle />} onClick={() => router.push("/user/editProfile")}>
+                                        Profile
                                     </DropdownItem>
                                     <DropdownItem
                                         startContent={<TbSunMoon />}

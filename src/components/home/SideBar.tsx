@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaAngleDown } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { GoDotFill } from "react-icons/go";
+import { ScrollArea } from "../ui/scroll-area";
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 const buttonData = [
@@ -17,11 +18,11 @@ const buttonData = [
             },
             {
                 title: "Silk George",
-                itemLists: ["Medium Silk Georges", "Medium Silk Stoned Georges"],
+                itemLists: ["Medium Silk George", "Medium Silk Stoned George"],
             },
             {
                 title: "Beaded George",
-                itemLists: ["Heavy Beaded Georges", "Heavy Beaded Silk Georges"],
+                itemLists: ["Heavy Beaded George", "Heavy Beaded Silk George"],
             },
             {
                 title: "French George",
@@ -207,69 +208,71 @@ export function Sidebar({ className }: SidebarProps) {
 
     return (
 
-        <div className=" py-4 overflow-hidden lg:block hidden" >
-            <div className={`${isFixed ? "fixed top-20 z-50 w-1/5 translate-y-0" : "translate-y-[-20px]"} transition-transform duration-1000 ease-in-out transform`}>
-                <h2 className="mb-2 p-4 text-lg font-semibold tracking-tight">
-                    Products
-                </h2>
-                <div className="px-4">
-                    {buttonData.map((item, index) => (
-                        <div key={index} className="relative inline-block text-left w-full border hoverEvent rounded-xl my-2">
-                            <button
-                                onClick={() => handleToggle(index)}
-                                className="flexStart   p-4 "
-                                aria-haspopup="true"
-                                aria-expanded={openIndex === index}
-                            >
-                                <span className="mr-2">{item.text}</span>
-                                <FaAngleDown className={`ml-auto transition-transform ${openIndex === index ? 'rotate-180' : ''}`} />
-                            </button>
-                            {openIndex === index && (
-                                <div className="relative right-0 mt-2 w-full">
-                                    <div className="py-1 z-60 bg-background">
-                                        {item.items.map((subItem, subIndex) => (
-                                            <div key={subIndex} className="relative w-full">
-                                                <button
-                                                    onClick={() => handleSubToggle(subIndex)}
-                                                    className="flexStart hoverEvent p-4 text-sm"
-                                                    aria-haspopup="true"
-                                                    aria-expanded={openSubIndex === subIndex}
-                                                >
+        <div className=" py-4 overflow-hidden lg:block hidden " >
+            <ScrollArea type="always" style={{ height: 580 }}>
+                <div className={`${isFixed ? " top-20 z-50 translate-y-0" : "translate-y-[-20px]"} transition-transform duration-1000 ease-in-out transform`}>
+                    <h2 className="mb-2 p-4 text-lg font-semibold tracking-tight">
+                        Products
+                    </h2>
+                    <div className="px-4">
+                        {buttonData.map((item, index) => (
+                            <div key={index} className="relative inline-block text-left w-full border hoverEvent rounded-xl my-2">
+                                <button
+                                    onClick={() => handleToggle(index)}
+                                    className="flexStart   p-4 "
+                                    aria-haspopup="true"
+                                    aria-expanded={openIndex === index}
+                                >
+                                    <span className="mr-2">{item.text}</span>
+                                    <FaAngleDown className={`ml-auto transition-transform ${openIndex === index ? 'rotate-180' : ''}`} />
+                                </button>
+                                {openIndex === index && (
+                                    <div className="relative right-0 mt-2 w-full">
+                                        <div className="py-1 z-60 bg-background">
+                                            {item.items.map((subItem, subIndex) => (
+                                                <div key={subIndex} className="relative w-full">
+                                                    <button
+                                                        onClick={() => handleSubToggle(subIndex)}
+                                                        className="flexStart hoverEvent p-4 text-sm"
+                                                        aria-haspopup="true"
+                                                        aria-expanded={openSubIndex === subIndex}
+                                                    >
+                                                        {
+                                                            !subItem.itemLists.length ?
+                                                                <Link key={index} className="gap-2 flexStart text-sm" href={`/goods/search?text=${subItem.title}`}>
+                                                                    <span>{subItem.title}</span>
+                                                                </Link>
+                                                                : <>
+                                                                    <span>{subItem.title}</span>
+                                                                    <FaAngleDown className={`ml-auto transition-transform ${openSubIndex === subIndex ? 'rotate-180' : ''}`} />
+                                                                </>
+                                                        }
+                                                    </button>
                                                     {
-                                                        !subItem.itemLists.length ?
-                                                            <Link key={index} className="gap-2 flexStart text-sm" href={`/goods/search?text=${subItem.title}`}>
-                                                                <span>{subItem.title}</span>
-                                                            </Link>
-                                                            : <>
-                                                                <span>{subItem.title}</span>
-                                                                <FaAngleDown className={`ml-auto transition-transform ${openSubIndex === subIndex ? 'rotate-180' : ''}`} />
-                                                            </>
+                                                        openSubIndex === subIndex && (
+                                                            <div className="relative right-0 mt-2 w-full">
+                                                                {
+                                                                    subItem.itemLists.map((item, index) => (
+                                                                        <div className="block px-8 py-4 hoverEvent">
+                                                                            <Link key={index} className="gap-2 flexStart text-sm" href={`/goods/search?text=${item}`}>
+                                                                                {item}
+                                                                            </Link>
+                                                                        </div>
+                                                                    ))
+                                                                }
+                                                            </div>
+                                                        )
                                                     }
-                                                </button>
-                                                {
-                                                    openSubIndex === subIndex && (
-                                                        <div className="relative right-0 mt-2 w-full">
-                                                            {
-                                                                subItem.itemLists.map((item, index) => (
-                                                                    <div className="block px-8 py-4 hoverEvent">
-                                                                        <Link key={index} className="gap-2 flexStart text-sm" href={`/goods/search?text=${item}`}>
-                                                                            {item}
-                                                                        </Link>
-                                                                    </div>
-                                                                ))
-                                                            }
-                                                        </div>
-                                                    )
-                                                }
-                                            </div>
-                                        ))}
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
-                            )}
-                        </div>
-                    ))}
+                                )}
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            </ScrollArea>
         </div>
 
     );

@@ -4,6 +4,7 @@ export interface ExtendedSession {
         email: string;
         password: string;
         image: string;
+        phone: string;
     };
     expires: string;
 }

@@ -51,7 +51,7 @@ export const AdminContext = React.createContext<ProviderValues>({});
 
 export function AdminProvider({ children }: { children: React.ReactNode }) {
     const [sidebarOpen, setSidebarOpen] = React.useState(false);
-    const pathname = usePathname(); // Get the current pathname
+    const pathname = usePathname();
     const [orders, setOrders] = useState<Order[]>([]);
     const openSidebar = React.useCallback(() => {
         setSidebarOpen(true);
@@ -60,7 +60,6 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     const closeSidebar = React.useCallback(() => {
         setSidebarOpen(false);
     }, []);
-
     React.useEffect(() => {
         const fetchOrders = async () => {
             try {
@@ -68,7 +67,6 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
                 if (response.ok) {
                     const data = await response.json();
                     setOrders(data);
-                    console.log("Orders fetched:", data);
                 } else {
                     console.error("Failed to fetch orders:", response.status);
                 }
@@ -76,8 +74,14 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
                 console.error("Error fetching orders:", error);
             }
         };
+
+        const intervalId = setInterval(fetchOrders, 3000);
+
         fetchOrders();
+
+        return () => clearInterval(intervalId);
     }, []);
+
 
     React.useEffect(() => {
         if (sidebarOpen && window.innerWidth < 1024) {

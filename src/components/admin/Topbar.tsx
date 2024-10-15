@@ -51,7 +51,6 @@ export default function TopBar() {
             }
         }
     };
-
     useEffect(() => {
         if (typeof window !== "undefined") {
             const htmlElement = document.querySelector("html");
@@ -68,6 +67,26 @@ export default function TopBar() {
     const { numTotalItems } = useContext(CartContext);
     const { openSidebar, orders } = useDashboardContext();
 
+    const [isBadgeVisible, setIsBadgeVisible] = useState(true);
+    const handleButtonClick = () => {
+        const formatDate = (date: any) => {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        };
+
+        const now = new Date();
+        const formattedDate = formatDate(now);
+        console.log("current time and date", formattedDate);
+        if (isBadgeVisible) {
+            setIsBadgeVisible(false);
+        }
+    };
 
     return (
         <div className="h-16 w-full bg-transparent dark:bg-[#18181b]  shadow-lg dark:border-b-1 dark:border-primaryHotefy-lighter lg:px-12 px-2">
@@ -125,7 +144,7 @@ export default function TopBar() {
                         >
                             <DropdownItem
                                 startContent={<LuLogIn />}
-                                onClick={() => router.push("/auth/login")}
+                                onClick={() => router.push("/user/login")}
                             >
                                 Login
                             </DropdownItem>
@@ -180,10 +199,11 @@ export default function TopBar() {
                                         variant="light"
                                         className="relative"
                                         size="lg"
+                                        onClick={handleButtonClick}
                                     >
                                         <CiMail size={28} />
                                         <div
-                                            className={`${orders?.length ? "block" : "hidden"
+                                            className={`${isBadgeVisible && orders?.length ? "block" : "hidden"
                                                 } cursor-default select-none`}
                                         >
                                             <div className="absolute top-1 left-7">

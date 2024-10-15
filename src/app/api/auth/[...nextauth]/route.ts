@@ -80,8 +80,19 @@ export const authOptions: AuthOptions = {
             if (token) {
                 session.user = {
                     ...(session.user as ExtendedUser),
-                    id: (token.user as ExtendedUser)?.id
+                    id: (token.user as ExtendedUser)?.id,
                 } as ExtendedUser;
+
+                const userFromDb = await prisma.user.findUnique({
+                    where: { id: session.user.id },
+                });
+
+                if (userFromDb) {
+                    session.user.name = userFromDb.name;
+                    session.user.email = userFromDb.email;
+                    session.user.image = userFromDb.image;
+                    session.user.phone = userFromDb.phone;
+                }
             }
             return session;
         },

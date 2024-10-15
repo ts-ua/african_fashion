@@ -5,4 +5,5 @@ export interface User {
     emailVerified: Date | null;
     password: string | null;
     image: string | null;
+    order: any;
 };

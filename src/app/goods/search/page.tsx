@@ -16,19 +16,27 @@ const SearchResult = () => {
     const homePage = () => {
         router.push("/");
     };
-
     useEffect(() => {
         const fetchGoods = async () => {
-            const response = await fetch(
-                `/api/goods/search?text=${searchParams.get("text") ?? ""}`
-            );
+            try {
+                const response = await fetch(`/api/goods?text=${searchParams.get("text")}`);
 
-            const data = await response.json();
-            setGoods(data);
+                if (!response.ok) {
+                    const errorMessage = await response.text();
+                    console.error("Error fetching goods:", response.status, errorMessage);
+                    return;
+                }
+
+                const data = await response.json();
+                setGoods(data);
+            } catch (error) {
+                console.error("Fetch goods error:", error);
+            }
         };
 
         fetchGoods();
     }, []);
+
 
     return (
         <div className="flex flex-col items-center justify-center mt-20">

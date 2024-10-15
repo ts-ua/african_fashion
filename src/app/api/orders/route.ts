@@ -1,19 +1,19 @@
-// app/api/orders/route.ts
-import { PrismaClient } from "@prisma/client";
+'use server'
+
+const { PrismaClient } = require("@prisma/client");
 import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
 export async function GET() {
     try {
-        const orders = await prisma.order.findMany({
+        const orders = await prisma.orders.findMany({
             include: {
                 user: true,
                 orderProducts: true,
             },
         });
 
-        // Return the orders as JSON using NextResponse
         return NextResponse.json(orders, { status: 200 });
     } catch (error) {
         console.error("Error fetching orders:", error);

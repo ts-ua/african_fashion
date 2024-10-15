@@ -142,15 +142,16 @@ export default function Settings() {
         }
       })
 
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      if (response.ok) {
+        window.location.assign('/admin/settings');
+      } else {
+        const error = await response.json();
+        console.log("Delete Failed:", error.message);
       }
 
-      const result = await response.json();
-      console.log('Delete successful:', result);
 
     } catch (error) {
-      console.error('Delete failed:', error);
+      console.error('Error while Deleting:', error);
     }
   }
 
@@ -178,7 +179,7 @@ export default function Settings() {
               </DropdownTrigger>
               <DropdownMenu>
                 <DropdownItem onClick={() => handleViewModalToggle(good)}> View </DropdownItem>
-                <DropdownItem onClick={handleEditModalToggle}>Edit</DropdownItem>
+                <DropdownItem onClick={() => handleEditModalToggle(good)}>Edit</DropdownItem>
                 <DropdownItem onClick={() => handleDelete(good.id)}>Delete</DropdownItem>
               </DropdownMenu>
             </Dropdown>
@@ -291,7 +292,7 @@ export default function Settings() {
         </div>
       </div>
     );
-  }, [filterValue, statusFilter, visibleColumns, onSearchChange, onRowsPerPageChange, modalOpen, viewModalOpen, users.length]);
+  }, [filterValue, statusFilter, visibleColumns, onSearchChange, onRowsPerPageChange, modalOpen, viewModalOpen, editModalOpen, users.length]);
 
   const bottomContent = useMemo(() => {
     return (

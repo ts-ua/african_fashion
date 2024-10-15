@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {
   const { id } = params;
-  console.log("id:", id)
   try {
     if (!id || typeof id !== 'string') {
       return NextResponse.json({ message: 'Invalid ID' }, { status: 400 });

@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Table,
     TableHeader,
@@ -34,9 +34,8 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
     vacation: "warning",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
 
-type User = typeof users[0];
+const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
 
 export default function Content() {
     const [filterValue, setFilterValue] = React.useState("");
@@ -50,31 +49,47 @@ export default function Content() {
     });
 
     const [page, setPage] = React.useState(1);
-
+    const [usersData, setUsersData] = useState([]);
     const hasSearchFilter = Boolean(filterValue);
-
+    type User = typeof usersData[0];
     const headerColumns = React.useMemo(() => {
         if (visibleColumns === "all") return columns;
 
         return columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
     }, [visibleColumns]);
 
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch(`/api/users`);
+                if (!response.ok) throw new Error('Failed to fetch');
+                const data = await response.json();
+
+                console.log("usersData:", data)
+                setUsersData(data);
+
+            } catch (error) {
+                console.error("Error fetching goods:", error);
+            }
+        };
+        const intervalid = setInterval(fetchUsers, 3000);
+
+        fetchUsers();
+
+        return () => clearInterval(intervalid);
+    }, []);
+
     const filteredItems = React.useMemo(() => {
-        let filteredUsers = [...users];
+        let filteredUsers = [...usersData];
 
         if (hasSearchFilter) {
-            filteredUsers = filteredUsers.filter((user) =>
-                user.name.toLowerCase().includes(filterValue.toLowerCase()),
-            );
-        }
-        if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
-            filteredUsers = filteredUsers.filter((user) =>
-                Array.from(statusFilter).includes(user.status),
+            filteredUsers = filteredUsers.filter((user: any) =>
+                user?.name?.toLowerCase().includes(filterValue.toLowerCase()),
             );
         }
 
         return filteredUsers;
-    }, [users, filterValue, statusFilter]);
+    }, [usersData, filterValue, statusFilter]);
 
     const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -95,14 +110,14 @@ export default function Content() {
         });
     }, [sortDescriptor, items]);
 
-    const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
+    const renderCell = React.useCallback((user: any, columnKey: React.Key) => {
         const cellValue = user[columnKey as keyof User];
 
         switch (columnKey) {
             case "name":
                 return (
                     <User
-                        avatarProps={{ radius: "lg", src: user.avatar }}
+                        avatarProps={{ radius: "lg", src: user.image }}
                         description={user.email}
                         name={cellValue}
                     >
@@ -320,7 +335,7 @@ export default function Content() {
                 )}
             </TableHeader>
             <TableBody emptyContent={"No users found"} items={sortedItems}>
-                {(item) => (
+                {(item: any) => (
                     <TableRow key={item.id}>
                         {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
                     </TableRow>
