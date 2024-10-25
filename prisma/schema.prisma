@@ -90,6 +90,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   order         Orders[]
+  role          String?
 }
 
 model VerificationToken {

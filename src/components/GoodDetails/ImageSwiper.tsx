@@ -65,6 +65,7 @@ const ImageSwiper: React.FC<ImageSwiperProps> = ({ imagesUrl }) => {
                                     fill
                                     style={{ objectFit: "cover" }}
                                     priority
+                                    sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
                                 />
                             </div>
                         </div>

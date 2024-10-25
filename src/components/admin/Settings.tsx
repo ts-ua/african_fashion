@@ -25,7 +25,7 @@ import { FaPlus } from "react-icons/fa6";
 import { FaEllipsisVertical } from "react-icons/fa6";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { IoSearch } from "react-icons/io5";
-import { columns, statusOptions, users } from "./data";
+import { columns } from "./data";
 import { capitalize } from "@/lib/utils";
 import ProductModal from "../common/adminModal/admin.modal";
 import ViewProductModal from "../common/adminModal/view.modal";
@@ -292,7 +292,7 @@ export default function Settings() {
         </div>
       </div>
     );
-  }, [filterValue, statusFilter, visibleColumns, onSearchChange, onRowsPerPageChange, modalOpen, viewModalOpen, editModalOpen, users.length]);
+  }, [filterValue, statusFilter, visibleColumns, onSearchChange, onRowsPerPageChange, modalOpen, viewModalOpen, editModalOpen]);
 
   const bottomContent = useMemo(() => {
     return (

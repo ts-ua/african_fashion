@@ -34,7 +34,7 @@ export default function RegisterPage() {
             });
 
             if (response.ok) {
-                router.push('');
+                router.push('/user/login');
             } else {
                 const errorData = await response.json();
                 setError(errorData.message || 'Failed to register');
@@ -54,7 +54,7 @@ export default function RegisterPage() {
                         width={100}
                         height={100}
                         className="mb-2"
-                        style={{ borderRadius: '50%' }}
+                        style={{ width: '100%', height: "auto", borderRadius: "50%" }}
                     />
                     <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
                         African Fashion

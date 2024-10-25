@@ -122,9 +122,10 @@ export default function Footer() {
                 <Link href="/">
                     <Image
                         src="/images/logo.png"
-                        alt="Foxtech"
+                        alt="logo"
                         width={100}
                         height={50}
+                        style={{ width: '100%', height: "auto", borderRadius: "50%" }}
                     />
                 </Link>
 

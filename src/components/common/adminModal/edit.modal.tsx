@@ -27,8 +27,6 @@ const ViewProductModal: React.FC<ViewProductModalProps> = ({
   }, [isOpen])
 
 
-  // image
-
   const [file, setFile] = useState<File | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,13 +46,9 @@ const ViewProductModal: React.FC<ViewProductModalProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!file) {
-      console.error("No image selected");
-      return;
-    }
 
     const formData = new FormData();
-    formData.append('file', file);
+    file && formData.append('file', file);
     formData.append('productData', JSON.stringify({
       name: name,
       price: Number(price),

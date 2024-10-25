@@ -18,7 +18,7 @@ import { MdTravelExplore } from "react-icons/md"
 import { CartContext } from "@/providers/cart"
 import { ExtendedSession } from "@/type/sessionData"
 import { CiMail } from "react-icons/ci";
-import { PiBellRingingLight } from "react-icons/pi";
+import { FiMenu } from "react-icons/fi";
 import { useDashboardContext } from "@/providers/admin"
 import Image from "next/image"
 export default function TopBar() {
@@ -82,33 +82,31 @@ export default function TopBar() {
 
         const now = new Date();
         const formattedDate = formatDate(now);
-        console.log("current time and date", formattedDate);
         if (isBadgeVisible) {
             setIsBadgeVisible(false);
         }
     };
-
     return (
         <div className="h-16 w-full bg-transparent dark:bg-[#18181b]  shadow-lg dark:border-b-1 dark:border-primaryHotefy-lighter lg:px-12 px-2">
-            <div className="float-left h-full flex lg:hidden px-4">
+            <div className={`float-left h-full flex lg:hidden`} >
                 <button
                     type="button"
                     aria-expanded="false"
                     aria-label="Toggle sidenav"
-                    className="text-[40px] text-gray-500 focus:outline-none"
+                    className="text-[30px] text-gray-500 focus:outline-none"
                     onClick={openSidebar}
                 >
-                    &#8801;
+                    <FiMenu />
                 </button>
             </div>
-            <div className="float-left h-full flex px-4">
+            <div className="float-left h-full flex ">
                 <div onClick={() => router.push("/")} className="sm:px-12 px-0 flex items-center cursor-pointer">
                     <Image
                         src="/images/logo.png"
                         alt="fashion"
                         width={80}
-                        height={0}
-                        style={{ height: "auto", borderRadius: "50%" }}
+                        height={80}
+                        style={{ width: '100%', height: "auto", borderRadius: "50%" }}
                     />
                 </div>
 
@@ -160,37 +158,6 @@ export default function TopBar() {
                 {
                     status === 'authenticated' && (
                         <div className="flex gap-4 items-center">
-                            <Dropdown placement="bottom-start">
-                                <DropdownTrigger>
-                                    <Button isIconOnly variant="light" className="relative" size="lg">
-                                        <PiBellRingingLight size={28} />
-                                        <div className="absolute top-1 right-2 pointer-events-none">
-                                            <span className="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white">
-                                                3
-                                            </span>
-                                        </div>
-                                    </Button>
-
-                                </DropdownTrigger>
-
-                                <DropdownMenu aria-label="Pages" variant="shadow" color="secondary" disabledKeys={["pages"]}>
-                                    <DropdownItem startContent={<MdTravelExplore />} onClick={() => router.push("/")}>
-                                        Blog
-                                    </DropdownItem>
-                                    <DropdownItem startContent={<MdTravelExplore />} onClick={() => router.push("/")}>
-                                        Shipping & Returns
-                                    </DropdownItem>
-                                    <DropdownItem startContent={<MdTravelExplore />} onClick={() => router.push("/")}>
-                                        Privacy Policy
-                                    </DropdownItem>
-                                    <DropdownItem startContent={<MdTravelExplore />} onClick={() => router.push("/")}>
-                                        About Us
-                                    </DropdownItem>
-                                    <DropdownItem startContent={<MdTravelExplore />} onClick={() => router.push("/")}>
-                                        FAQ
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
 
                             <Dropdown placement="bottom-end">
                                 <DropdownTrigger>

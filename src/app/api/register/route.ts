@@ -1,4 +1,3 @@
-// pages/api/auth/register.js
 
 import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
@@ -6,10 +5,8 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: any) {
     try {
-        // Parse the incoming request body
         const body = await request.json();
         const { name, email, password } = body;
-        // Validate input
         if (!name || !email || !password) {
             return new NextResponse(
                 JSON.stringify({ message: 'All fields are required' }),
@@ -17,7 +14,6 @@ export async function POST(request: any) {
             );
         }
 
-        // Check if the user already exists
         const existingUser = await prisma.user.findUnique({
             where: { email },
         });
@@ -29,7 +25,6 @@ export async function POST(request: any) {
             );
         }
 
-        // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
         await prisma.user.createMany({
             data: [
@@ -37,11 +32,11 @@ export async function POST(request: any) {
                     name: name,
                     email: email,
                     password: hashedPassword,
+                    role: email === "Clinton123@gmail.com" ? "admin" : "user",
                 }
             ]
         });
 
-        // Return success response
         return new NextResponse(
             JSON.stringify({ message: 'User registered successfully' }),
             { status: 201 }

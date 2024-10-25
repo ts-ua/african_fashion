@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import GoodItem from "@/components/common/GoodItem";
+import { Button } from "@nextui-org/react";
 
 interface SelGoodsProps {
     text: string;
@@ -10,6 +11,7 @@ interface SelGoodsProps {
 const SelGoods: React.FC<SelGoodsProps> = ({ text }) => {
 
     const [goods, setGoods] = React.useState<any[]>([]);
+    const [visible, setVisible] = React.useState(12);
     useEffect(() => {
         const fetchGoods = async () => {
             const response = await fetch(
@@ -18,16 +20,22 @@ const SelGoods: React.FC<SelGoodsProps> = ({ text }) => {
             const data = await response.json();
             setGoods(data);
         };
-
         fetchGoods();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
     return (
-        <section className="w-full mx-auto flex flex-col md:flex-row flex-wrap items-center justify-center gap-2">
-            {goods.map((good: any) => (
-                <GoodItem good={good} key={good.id} />
-            ))}
+        <section>
+
+            <div className="w-full mx-auto flex flex-col md:flex-row flex-wrap items-center justify-center gap-2">
+                {goods.slice(0, visible).map((good: any) => (
+                    <GoodItem good={good} key={good.id} />
+                ))}
+            </div>
+            {visible < goods.length && (
+                <div className="w-full flex items-center justify-center"><Button className="bg-[#e74a77] px-8 my-8" radius="full" onClick={() => setVisible((prev) => prev + 8)}>
+                    Load More
+                </Button>
+                </div>
+            )}
         </section>
     );
 };

@@ -54,12 +54,19 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const [orders, setOrders] = useState<Order[]>([]);
     const openSidebar = React.useCallback(() => {
-        setSidebarOpen(true);
-    }, []);
+        setSidebarOpen(!sidebarOpen);
+    }, [sidebarOpen]);
 
     const closeSidebar = React.useCallback(() => {
         setSidebarOpen(false);
     }, []);
+    const checkWindowWidth = () => {
+        if (window.innerWidth < 1024) {
+            setSidebarOpen(true);
+        } else {
+            setSidebarOpen(false);
+        }
+    };
     React.useEffect(() => {
         const fetchOrders = async () => {
             try {
@@ -75,19 +82,21 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
             }
         };
 
-        const intervalId = setInterval(fetchOrders, 3000);
+        // const intervalId = setInterval(fetchOrders, 3000);
 
         fetchOrders();
 
-        return () => clearInterval(intervalId);
+        // return () => clearInterval(intervalId);
     }, []);
 
 
     React.useEffect(() => {
-        if (sidebarOpen && window.innerWidth < 1024) {
-            setSidebarOpen(true);
-        }
-    }, [pathname, sidebarOpen]);
+        checkWindowWidth();
+        window.addEventListener('resize', checkWindowWidth);
+        return () => {
+            window.removeEventListener('resize', checkWindowWidth);
+        };
+    }, []);
 
     return (
         <AdminContext.Provider value={{ sidebarOpen, openSidebar, closeSidebar, orders }}>

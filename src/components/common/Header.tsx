@@ -92,8 +92,8 @@ export default function Header() {
                         src="/images/logo.png"
                         alt="fashion"
                         width={80}
-                        height={0}
-                        style={{ height: "auto", borderRadius: "50%" }}
+                        height={80}
+                        style={{ width: '100%', height: "auto", borderRadius: "50%" }}
                     />
                 </div>
             </div>
@@ -169,8 +169,15 @@ export default function Header() {
                                         About Us
                                     </DropdownItem>
 
+
+
                                 </DropdownMenu>
                             </Dropdown>
+                            {
+                                data?.user?.role === "admin" && (
+                                    <Button onClick={() => router.push('/admin')}>admin</Button>
+                                )
+                            }
 
                             <Sheet>
                                 <div className="relative">

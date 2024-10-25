@@ -6,11 +6,12 @@ import { Button, Link, Tooltip } from "@nextui-org/react";
 import { TbCategory2 } from "react-icons/tb";
 import { Separator } from "../ui/separator";
 import { AiOutlineSafety } from "react-icons/ai";
-// import { createCheckout } from "@/actions/checkout";
-// import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { useSession } from "next-auth/react";
 import { ScrollArea } from "../ui/scroll-area";
-import { createOrder, createTriggerAndNotifyFunction } from "@/actions/order";
+import { createOrder } from "@/actions/order";
+import { createCheckout } from "@/actions/checkout";
+import { SheetClose, SheetFooter } from "../ui/sheet";
 
 const Cart = ({ userId }: { userId: string }) => {
   const { products, subtotal, total, totalDiscount } = useContext(CartContext);
@@ -18,13 +19,14 @@ const Cart = ({ userId }: { userId: string }) => {
   const handleFinishPurchaseClick = async () => {
     const order = await createOrder(products, userId);
 
-    // const checkout = await createCheckout(products, order.id);
+    const checkout = await createCheckout(products, order.id);
+    console.log("checkout:", checkout)
 
-    // const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
-
-    // stripe?.redirectToCheckout({
-    //   sessionId: checkout.id,
-    // });
+    const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
+    console.log("stripe:", stripe)
+    stripe?.redirectToCheckout({
+      sessionId: checkout.id,
+    });
   };
 
   return (
@@ -98,51 +100,56 @@ const Cart = ({ userId }: { userId: string }) => {
               })}
             </p>
           </div>
+          <SheetFooter>
 
-          <div className="w-full max-w-xl">
-            {userId || data?.user ? (
-              <Button
-                variant="shadow"
-                color="primary"
-                radius="sm"
-                className="w-full font-bold uppercase"
-                endContent={<AiOutlineSafety size={24} />}
-                onClick={handleFinishPurchaseClick}
-              >
-                Checkout
-              </Button>
-            ) : (
-              <Tooltip
-                content={
-                  <p className="cursor-default text-center font-bold">
-                    Oops! You need to log in to complete your purchase.
-                  </p>
-                }
-                delay={0}
-                closeDelay={0}
-                color="primary"
-                placement="top"
-                radius="sm"
-                className="hidden w-full max-w-xs lg:block"
-              >
-                <div className="w-full cursor-not-allowed">
+            <div className="w-full max-w-xl">
+              {userId || data?.user ? (
+                <SheetClose asChild>
+
                   <Button
                     variant="shadow"
                     color="primary"
                     radius="sm"
                     className="w-full font-bold uppercase"
                     endContent={<AiOutlineSafety size={24} />}
-                    isDisabled
+                    onClick={handleFinishPurchaseClick}
                   >
                     Checkout
                   </Button>
-                  <p className="mt-2 text-center text-sm text-red-500 opacity-80 lg:hidden">
-                    To complete the purchase you must log in.
-                  </p>
-                </div>
-              </Tooltip>
-            )}
-          </div>
+                </SheetClose>
+              ) : (
+                <Tooltip
+                  content={
+                    <p className="cursor-default text-center font-bold">
+                      Oops! You need to log in to complete your purchase.
+                    </p>
+                  }
+                  delay={0}
+                  closeDelay={0}
+                  color="primary"
+                  placement="top"
+                  radius="sm"
+                  className="hidden w-full max-w-xs lg:block"
+                >
+                  <div className="w-full cursor-not-allowed">
+                    <Button
+                      variant="shadow"
+                      color="primary"
+                      radius="sm"
+                      className="w-full font-bold uppercase"
+                      endContent={<AiOutlineSafety size={24} />}
+                      isDisabled
+                    >
+                      Checkout
+                    </Button>
+                    <p className="mt-2 text-center text-sm text-red-500 opacity-80 lg:hidden">
+                      To complete the purchase you must log in.
+                    </p>
+                  </div>
+                </Tooltip>
+              )}
+            </div>
+          </SheetFooter>
         </div>
       )}
     </div>

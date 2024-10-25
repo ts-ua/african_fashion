@@ -52,7 +52,7 @@ export default function LoginPage() {
                         width={100}
                         height={100}
                         className="mb-2"
-                        style={{ borderRadius: '50%' }}
+                        style={{ width: '100%', height: "auto", borderRadius: "50%" }}
                     />
                     <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
                         African Fashion

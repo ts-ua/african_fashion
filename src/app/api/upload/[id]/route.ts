@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma'; // Make sure to import your prisma instance
+import { prisma } from '@/lib/prisma';
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
@@ -21,7 +21,7 @@ export async function POST(req: any, { params }: { params: { id: string } }) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 });
     }
 
-    let coverImagePath = existingProduct.coverImage; // Keep the existing image path
+    let coverImagePath = existingProduct.coverImage;
     if (file) {
       const buffer = Buffer.from(await file.arrayBuffer());
       const uniqueName = `${crypto.randomBytes(16).toString('hex')}-${file.name}`;
@@ -29,10 +29,9 @@ export async function POST(req: any, { params }: { params: { id: string } }) {
       await fs.promises.mkdir(path.dirname(uploadPath), { recursive: true });
       await fs.promises.writeFile(uploadPath, buffer);
 
-      coverImagePath = `/uploads/${productData.name}/${uniqueName}`; // Update the image path
+      coverImagePath = `/uploads/${productData.name}/${uniqueName}`;
     }
 
-    // Update the product record
     await prisma.good.update({
       where: { id },
       data: {

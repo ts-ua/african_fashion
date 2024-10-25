@@ -184,7 +184,6 @@ const buttonData = [
 export function Sidebar({ className }: SidebarProps) {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
     const [openSubIndex, setOpenSubIndex] = useState<number | null>(null);
-    const [isFixed, setIsFixed] = useState<boolean>(false);
     const handleToggle = (index: number) => {
         setOpenIndex(openIndex === index ? null : index);
     };
@@ -193,24 +192,11 @@ export function Sidebar({ className }: SidebarProps) {
         setOpenSubIndex(openSubIndex === index ? null : index);
     };
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 940) {
-                setIsFixed(true);
-            } else {
-                setIsFixed(false);
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
     return (
 
         <div className=" py-4 overflow-hidden lg:block hidden " >
-            <ScrollArea type="always" style={{ height: 580 }}>
-                <div className={`${isFixed ? " top-20 z-50 translate-y-0" : "translate-y-[-20px]"} transition-transform duration-1000 ease-in-out transform`}>
+            <ScrollArea type="always">
+                <div>
                     <h2 className="mb-2 p-4 text-lg font-semibold tracking-tight">
                         Products
                     </h2>

@@ -8,6 +8,8 @@ import { Adapter } from "next-auth/adapters";
 
 interface ExtendedUser extends User {
     id: string;
+    phone: string | null;
+    role: string;
 }
 
 export const authOptions: AuthOptions = {
@@ -84,14 +86,15 @@ export const authOptions: AuthOptions = {
                 } as ExtendedUser;
 
                 const userFromDb = await prisma.user.findUnique({
-                    where: { id: session.user.id },
+                    where: { id: (session.user as ExtendedUser).id },
                 });
 
                 if (userFromDb) {
                     session.user.name = userFromDb.name;
                     session.user.email = userFromDb.email;
                     session.user.image = userFromDb.image;
-                    session.user.phone = userFromDb.phone;
+                    (session.user as ExtendedUser).phone = userFromDb.phone;
+                    (session.user as ExtendedUser).role = userFromDb.role;
                 }
             }
             return session;
