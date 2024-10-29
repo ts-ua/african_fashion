@@ -10,20 +10,64 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useSession } from "next-auth/react";
 import { ScrollArea } from "../ui/scroll-area";
 import { createOrder } from "@/actions/order";
-import { createCheckout } from "@/actions/checkout";
 import { SheetClose, SheetFooter } from "../ui/sheet";
+import { useRouter } from "next/navigation";
+
 
 const Cart = ({ userId }: { userId: string }) => {
   const { products, subtotal, total, totalDiscount } = useContext(CartContext);
   const { status, data } = useSession();
+  const router = useRouter();
+
+  const fetchStripe = async () => {
+    const requestBody = { products, userId }
+    try {
+      const response = await fetch('/api/stripe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody)
+      })
+
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        console.log("Error:", response.json())
+      }
+
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+
+  const confirmStripe = async (checktoutId: string) => {
+    try {
+      const response = await fetch(`/api/stripe?'checkoutId' = ${checktoutId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (response.ok) {
+        return response.json();
+      }
+    } catch (error) {
+      console.log('error:', error);
+    }
+  }
+
   const handleFinishPurchaseClick = async () => {
     const order = await createOrder(products, userId);
 
-    const checkout = await createCheckout(products, order.id);
-    console.log("checkout:", checkout)
+
+    const checkout = await fetchStripe();
 
     const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
-    console.log("stripe:", stripe)
+
+    await confirmStripe(checkout?.id);
     stripe?.redirectToCheckout({
       sessionId: checkout.id,
     });

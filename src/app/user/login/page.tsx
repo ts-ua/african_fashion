@@ -44,16 +44,9 @@ export default function LoginPage() {
         <div
             className=" min-h-screen justify-center text-center flex flex-col items-center bg-gray-50 dark:bg-gray-800 "
         >
-            <div className='flex flex-col border dark:border-primaryHotefy-lighter dark:bg-[#18181b] items-center justify-center p-8 rounded-lg  max-w-md shadow-lg'>
-                <div className='flex justify-center items-center gap-4'>
-                    <Image
-                        src="/images/logo.png"
-                        alt="African Fashion Logo"
-                        width={100}
-                        height={100}
-                        className="mb-2"
-                        style={{ width: '100%', height: "auto", borderRadius: "50%" }}
-                    />
+            <div className='flex flex-col border dark:border-primaryHotefy-lighter dark:bg-[#18181b] items-center justify-center p-8 rounded-lg w-[450px] shadow-lg'>
+                <div className='flex items-center gap-4'>
+
                     <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
                         African Fashion
                     </h1>

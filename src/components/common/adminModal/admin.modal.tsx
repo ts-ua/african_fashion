@@ -93,7 +93,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
         setFile(null);
         setFilePreview(null);
         setSelectedSubType('');
-        window.location.assign("/admin/settings");
+        window.location.assign("/admin/products");
       } else {
         const error = await response.json();
         console.error("Upload failed:", error.message);

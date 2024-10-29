@@ -65,7 +65,7 @@ const ViewProductModal: React.FC<ViewProductModalProps> = ({
         onOpenChange(false);
         setFile(null);
         setFilePreview('');
-        window.location.assign('/admin/settings');
+        window.location.assign('/admin/products');
 
       } else {
         const error = await response.json();

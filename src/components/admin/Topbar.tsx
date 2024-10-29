@@ -104,14 +104,14 @@ export default function TopBar() {
                     <Image
                         src="/images/logo.png"
                         alt="fashion"
-                        width={80}
-                        height={80}
+                        width={60}
+                        height={0}
                         style={{ width: '100%', height: "auto", borderRadius: "50%" }}
                     />
                 </div>
 
             </div>
-            <div className="float-right flex h-full">
+            <div className="float-right flex h-full items-center">
                 {
                     status === 'loading' && (
                         <Button

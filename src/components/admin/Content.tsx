@@ -28,6 +28,17 @@ import { IoSearch } from "react-icons/io5";
 import { columns, statusOptions } from "./data";
 import { capitalize } from "@/lib/utils";
 import TotalSection from "./totalSection";
+import { useDashboardContext } from "@/providers/admin";
+import CardLineChart from "./chart";
+
+interface User {
+    id: string;
+    email: string;
+    emailVerified: string | null;
+    name: string;
+    image: string | null;
+    password: string;
+}
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
     active: "success",
@@ -48,47 +59,27 @@ export default function Content() {
         column: "age",
         direction: "ascending",
     });
-
+    const { userData } = useDashboardContext()
     const [page, setPage] = React.useState(1);
     const [usersData, setUsersData] = useState([]);
     const hasSearchFilter = Boolean(filterValue);
-    type User = typeof usersData[0];
     const headerColumns = React.useMemo(() => {
         if (visibleColumns === "all") return columns;
 
         return columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
     }, [visibleColumns]);
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await fetch(`/api/users`);
-                if (!response.ok) throw new Error('Failed to fetch');
-                const data = await response.json();
-                setUsersData(data);
-
-            } catch (error) {
-                console.error("Error fetching goods:", error);
-            }
-        };
-        // const intervalid = setInterval(fetchUsers, 3000);
-
-        fetchUsers();
-
-        // return () => clearInterval(intervalid);
-    }, []);
-
     const filteredItems = React.useMemo(() => {
-        let filteredUsers = [...usersData];
+        let filteredUsers: User[] = userData || [];
 
         if (hasSearchFilter) {
-            filteredUsers = filteredUsers.filter((user: any) =>
-                user?.name?.toLowerCase().includes(filterValue.toLowerCase()),
-            );
+            filteredUsers = usersData?.filter((user: User) =>
+                user?.name?.toLowerCase().includes(filterValue.toLowerCase())
+            ) || [];
         }
 
         return filteredUsers;
-    }, [usersData, filterValue, statusFilter]);
+    }, [usersData, filterValue, statusFilter, userData]);
 
     const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -100,9 +91,9 @@ export default function Content() {
     }, [page, filteredItems, rowsPerPage]);
 
     const sortedItems = React.useMemo(() => {
-        return [...items].sort((a: User, b: User) => {
-            const first = a[sortDescriptor.column as keyof User] as number;
-            const second = b[sortDescriptor.column as keyof User] as number;
+        return [...items].sort((a: any, b: any) => {
+            const first = a[sortDescriptor.column as keyof any] as number;
+            const second = b[sortDescriptor.column as keyof any] as number;
             const cmp = first < second ? -1 : first > second ? 1 : 0;
 
             return sortDescriptor.direction === "descending" ? -cmp : cmp;
@@ -191,7 +182,7 @@ export default function Content() {
 
     const topContent = React.useMemo(() => {
         return (
-            <div className="flex flex-col gap-4  py-4">
+            <div className="flex flex-col gap-4  py-4 h-full">
                 <div className="flex justify-between gap-3 items-end">
                     <Input
                         isClearable
@@ -307,6 +298,7 @@ export default function Content() {
     return (
         <>
             <TotalSection />
+            <CardLineChart />
             <Table
                 aria-label="Example table with custom cells, pagination and sorting"
                 isHeaderSticky

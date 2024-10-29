@@ -1,17 +1,29 @@
 
 import { FaHome as HomeIcon } from "react-icons/fa";
 import { FaCog as SettingsIcon } from "react-icons/fa";
-
+import { FiUsers } from "react-icons/fi";
+import { FaCartArrowDown } from "react-icons/fa";
+import { RxDashboard } from "react-icons/rx";
 export const data = [
     {
         title: "Dashboard",
-        icon: <HomeIcon />,
+        icon: <RxDashboard />,
         link: "/admin",
     },
     {
-        title: "Settings",
+        title: "Customers",
+        icon: <FiUsers />,
+        link: "/admin/customer",
+    },
+    {
+        title: "Orders",
+        icon: <FaCartArrowDown />,
+        link: "/admin/order",
+    },
+    {
+        title: "Products",
         icon: <SettingsIcon />,
-        link: "/admin/settings",
+        link: "/admin/products",
     },
 ];
 

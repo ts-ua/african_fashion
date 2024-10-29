@@ -84,15 +84,15 @@ export default function Header() {
     const { numTotalItems } = useContext(CartContext);
 
     return (
-        <div className="h-16 fixed w-full z-50 bg-transparent dark:bg-[#18181b] shadow-lg dark:border-b-1 dark:border-primaryHotefy-lighter flex items-center justify-between lg:px-12 px-2 opacity-90">
+        <div className="h-16 fixed w-full z-50 bg-white dark:bg-[#18181b] shadow-lg dark:border-b-1 dark:border-primaryHotefy-lighter flex items-center justify-between lg:px-12 px-2 ">
             <div className=" flex items-center lg:gap-12 md:gap-8 gap-0">
                 <div onClick={() => router.push("/")} className="sm:px-12 px-0 flex items-center cursor-pointer">
                     <span className={`${myFont.className} text-[24px] text-primaryHotefy-neutral dark:text-primaryHotefy-lighter md:block hidden`}>AfricanFashion</span>
                     <Image
                         src="/images/logo.png"
                         alt="fashion"
-                        width={80}
-                        height={80}
+                        width={60}
+                        height={0}
                         style={{ width: '100%', height: "auto", borderRadius: "50%" }}
                     />
                 </div>

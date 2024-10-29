@@ -118,13 +118,13 @@ export default function Footer() {
 
     return (
         <footer className="mx-auto w-full cursor-default items-center justify-center bg-[#FAF9FF] dark:bg-[#18181b] shadow-xl md:px-0 dark:border-t dark:border-gamtech  z-50">
-            <section className="flex flex-col   items-center justify-around shadow-xl md:flex-row md:gap-y-0 py-2">
+            <section className="flex flex-col   items-center justify-around shadow-xl md:flex-row md:gap-y-0 py-1">
                 <Link href="/">
                     <Image
                         src="/images/logo.png"
                         alt="logo"
-                        width={100}
-                        height={50}
+                        width={70}
+                        height={0}
                         style={{ width: '100%', height: "auto", borderRadius: "50%" }}
                     />
                 </Link>

@@ -31,7 +31,7 @@ const SelGoods: React.FC<SelGoodsProps> = ({ text }) => {
                 ))}
             </div>
             {visible < goods.length && (
-                <div className="w-full flex items-center justify-center"><Button className="bg-[#e74a77] px-8 my-8" radius="full" onClick={() => setVisible((prev) => prev + 8)}>
+                <div className="w-full flex items-center justify-center"><Button className="bg-[#e74a77] px-8 my-8 text-white" radius="full" onClick={() => setVisible((prev) => prev + 8)}>
                     Load More
                 </Button>
                 </div>

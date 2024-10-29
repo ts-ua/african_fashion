@@ -1,9 +1,23 @@
 'use client'
+import { useDashboardContext } from "@/providers/admin";
+import { useEffect, useState } from "react";
 import { FaShoppingBag } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { IoWallet } from "react-icons/io5";
 export default function TotalSection() {
+  const { userData, orders } = useDashboardContext();
+  const [totalPrices, setTotalPrices] = useState(0)
+  const calculatedTotal = orders?.reduce((acc, order) => {
+    const orderTotal = order?.orderProducts?.reduce((sum, product) => {
+      return sum + (product.basePrice * product.quantity);
+    }, 0);
+    return acc + orderTotal;
+  }, 0);
+  useEffect(() => {
+    setTotalPrices(calculatedTotal || 0);
+  }, [orders]);
+
   const totalSales = 14732;
   const salesIncreasePercentage = 4.2;
   return (
@@ -33,7 +47,7 @@ export default function TotalSection() {
           <h3 className="text-foreground font-medium text-sm">Total Expenses</h3>
           <div className="flex items-center justify-between">
             <span className="text-gray-500 font-bold text-2xl">
-              {totalSales.toLocaleString()}
+              ${calculatedTotal?.toLocaleString()}
             </span>
             <span className="text-green-500 font-semibold text-sm">
               +{salesIncreasePercentage}%
@@ -50,7 +64,7 @@ export default function TotalSection() {
           <h3 className="text-foreground font-medium text-sm">Total Visitors</h3>
           <div className="flex items-center justify-between">
             <span className="text-gray-500 font-bold text-2xl">
-              {totalSales.toLocaleString()}
+              {userData?.length.toLocaleString()}
             </span>
             <span className="text-green-500 font-semibold text-sm">
               +{salesIncreasePercentage}%
@@ -67,7 +81,7 @@ export default function TotalSection() {
           <h3 className="text-foreground font-medium text-sm">Total Orders</h3>
           <div className="flex items-center justify-between">
             <span className="text-gray-500 font-bold text-2xl">
-              {totalSales.toLocaleString()}
+              {orders?.length.toLocaleString()}
             </span>
             <span className="text-green-500 font-semibold text-sm">
               +{salesIncreasePercentage}%

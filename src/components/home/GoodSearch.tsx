@@ -75,7 +75,7 @@ const GoodSearch = () => {
                 </h2>
                 <div className="sliding-text">
                     <p className="p-8 text-white text-[32px] xl:text-[38px] max-w-3xl mx-auto font-[800]">
-                        <span className="text-green-500">Home of the latest{" "}</span>
+                        <span className="text-green-500 glitch">Home of the latest{" "}</span>
                         African Fashion
                     </p>
                 </div>

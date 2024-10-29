@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { usePathname } from 'next/navigation';  // For detecting route changes
 
-interface User {
+export interface User {
     id: string;
     email: string;
     emailVerified: string | null;
@@ -43,7 +43,8 @@ interface ProviderValues {
     sidebarOpen?: boolean;
     openSidebar?: () => void;
     closeSidebar?: () => void;
-    orders?: Order[];  // Added orders to the ProviderValues interface
+    orders?: Order[];
+    userData?: User[];
 }
 
 // create new context
@@ -60,6 +61,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     const closeSidebar = React.useCallback(() => {
         setSidebarOpen(false);
     }, []);
+    const [userData, setUsersData] = useState<User[]>([]);
     const checkWindowWidth = () => {
         if (window.innerWidth < 1024) {
             setSidebarOpen(true);
@@ -73,6 +75,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
                 const response = await fetch('/api/orders');
                 if (response.ok) {
                     const data = await response.json();
+                    console.log("orders", data)
                     setOrders(data);
                 } else {
                     console.error("Failed to fetch orders:", response.status);
@@ -82,10 +85,21 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
             }
         };
 
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch('/api/users');
+                if (!response.ok) throw new Error('Failed to fetch');
+                const data = await response.json();
+                setUsersData(data);
+            } catch (error) {
+                console.error('Error fetching goods:', error);
+            }
+        }
+
         // const intervalId = setInterval(fetchOrders, 3000);
 
         fetchOrders();
-
+        fetchUsers();
         // return () => clearInterval(intervalId);
     }, []);
 
@@ -99,7 +113,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     }, []);
 
     return (
-        <AdminContext.Provider value={{ sidebarOpen, openSidebar, closeSidebar, orders }}>
+        <AdminContext.Provider value={{ sidebarOpen, openSidebar, closeSidebar, orders, userData }}>
             {children}
         </AdminContext.Provider>
     );
